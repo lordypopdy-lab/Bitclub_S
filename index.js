@@ -17,6 +17,12 @@ app.get('/', (req, res)=>{
     })
 })
 
+app.use((req, res, next) => {
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups');
+    res.setHeader('Cross-Origin-Embedder-Policy', 'unsafe-none');
+    next();
+  });
+
 mongoose.connect(process.env.MONGO_URL)
 .then(()=> console.log('Database Connected successfuly!'))
 .catch((error)=> console.log('Database not connected', error));
@@ -24,7 +30,7 @@ mongoose.connect(process.env.MONGO_URL)
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
-// app.use('/api/', require('./routes/authRoute'));
+app.use('/api/', require('./routes/authRoute'));
 
 const port = 8000;
 app.listen(port, ()=> console.log(`Server is running at port ${port}`));

@@ -20,6 +20,6 @@ mongoose.connect(process.env.MONGO_URL)
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
-app.use('/', require('./routes/authRoute'));
+app.use('/api/', require('./routes/authRoute'));
 
 module.exports = app

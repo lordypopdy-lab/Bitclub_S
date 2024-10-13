@@ -12,7 +12,7 @@ app.use(cors({
   }));
 
 app.get('/', (req, res)=>{
-    return res.status(200).json({
+    return res.json({
         message: "Server Is Running Successfully!"
     })
 })

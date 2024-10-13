@@ -6,12 +6,6 @@ const cors = require('cors');
 
 const app = express();
 
-app.get('/', (req, res)=>{
-  return res.status(200).json({
-    message: "Server Running Successfully! Sir JamesDev"
-  })
-})
-
 app.use(cors({
     origin: '*', 
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 

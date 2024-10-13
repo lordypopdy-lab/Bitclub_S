@@ -33,6 +33,7 @@ const {
     pauseContractTwo,
     getProfitOne,
     getProfitTwo,
+    tester
 
 
 } = require('../controllers/authController');
@@ -48,6 +49,7 @@ router.post('/login', loginUser);
 router.post('/pinCheck', pinCheck);
 router.post('/register', registerUser);
 router.get('/tokens', tokenViews)
+router.get('/tester', tester);
 router.post('/userInfo', userInfo);
 router.post('/getProfitOne', getProfitOne);
 router.post('/getProfitTwo', getProfitTwo);

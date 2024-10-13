@@ -1296,11 +1296,11 @@ const getContractTwo = async (req, res) => {
     })
 }
 
-// const Checker2 = async ()=>{
-// //     console.log("Hello World James!");
-//  IF TODAYS DATE IS > THAN THE LAST DEFAULT DATE, INCREASE PROFIT AND UPDATE DATE
-// }
-// setInterval(Checker2, 9000);
+const tester = async (req, res)=>{
+    return res.status(200).json({
+        message: "Access Success!"
+    })
+}
 
 module.exports = {
     userInfo,
@@ -1309,6 +1309,7 @@ module.exports = {
     createPin,
     citizenId,
     pinVerify,
+    tester,
     getProfitOne,
     getProfitTwo,
     tokenViews,

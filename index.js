@@ -15,3 +15,5 @@ app.get('/', (req, res)=>{
 })
 
 app.listen(8000, ()=>console.log(`Server Running at Port 80000`))
+
+module.exports = app

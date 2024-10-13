@@ -11,6 +11,12 @@ app.use(cors({
     credentials: true,
   }));
 
+app.get('/', (req, res)=>{
+    return res.status(200).json({
+        message: "Server Is Running Successfully!"
+    })
+})
+
 mongoose.connect(process.env.MONGO_URL)
 .then(()=> console.log('Database Connected successfuly!'))
 .catch((error)=> console.log('Database not connected', error));
@@ -20,7 +26,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
 app.use('/', require('./routes/authRoute'));
 
-// const port = 8000;
-// app.listen(port, ()=> console.log(`Server is running at port ${port}`));
+const port = 8000;
+app.listen(port, ()=> console.log(`Server is running at port ${port}`));
 
 module.exports = app

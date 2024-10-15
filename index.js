@@ -22,6 +22,4 @@ app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
 app.use('/', require('./routes/authRoute'));
 
-app.lis
-
 module.exports = app

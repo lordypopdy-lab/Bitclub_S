@@ -7,7 +7,7 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors({
-    origin: 'https://bitclub-wallet.vercel.app', 
+    origin: '*', 
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
     allowedHeaders: ['Content-Type', 'Authorization'], 
     credentials: true 
@@ -21,5 +21,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
 app.use('/', require('./routes/authRoute'));
+
+app.lis
 
 module.exports = app

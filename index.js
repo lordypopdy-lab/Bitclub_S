@@ -20,6 +20,9 @@ mongoose.connect(process.env.MONGO_URL)
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
-app.use('/', require('./routes/authRoute'));
+// app.use('/', require('./routes/authRoute'));
 
-module.exports = app
+const PORT = 8080
+app.listen(PORT, ()=>{
+  console.log(`App is Running at Port: ${PORT}`);
+})

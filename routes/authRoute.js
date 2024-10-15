@@ -38,7 +38,7 @@ const {
 
 router.use(
   cors({
-    origin: "https://bitclub-wallet.vercel.app/",
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,

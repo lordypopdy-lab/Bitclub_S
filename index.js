@@ -20,7 +20,7 @@ mongoose.connect(process.env.MONGO_URL)
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
-// app.use('/', require('./routes/authRoute'));
+app.use('/', require('./routes/authRoute'));
 
 const PORT = 8080
 app.listen(PORT, ()=>{

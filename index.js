@@ -23,5 +23,5 @@ app.use('/', require('./routes/authRoute'));
 
 const PORT = 8080
 app.listen(PORT, ()=>{
-  console.log(`App is Running at Port Test: ${PORT}`);
+  console.log(`App is Running at Port Test2: ${PORT}`);
 })

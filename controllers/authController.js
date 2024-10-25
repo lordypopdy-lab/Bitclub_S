@@ -1298,7 +1298,7 @@ const getContractTwo = async (req, res) => {
 
 const tester = async (req, res)=>{
     return res.status(200).json({
-        message: "Access Success!"
+        message: "Access Tester Succesfully!"
     })
 }
 

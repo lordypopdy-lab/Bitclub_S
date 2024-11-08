@@ -10,6 +10,56 @@ const notificationModel = require('../models/notification');
 const userInfomation = require('../models/userInformation');
 const Admin = require('../models/AdminModel/admin');
 const ContractTwo = require('../models/contractTwo');
+const Erc20Wallet = require("../models/Erc20Wallet");
+const { ethers } = require('ethers');
+
+/////////////////////////-----GENERAL FUNCTIONALITY SECTION-----/////////////////////////////// 
+/////////////////////////---------------------------------------/////////////////////////////// 
+/////////////////////////---------------------------------------/////////////////////////////// 
+/////////////////////////---------------------------------------/////////////////////////////// 
+
+const Erc20WalletAuth = async (req, res)=>{
+    const { email } = req.body;
+
+    const checkErc20 = await Erc20Wallet.findOne({email: email});
+    
+    if(checkErc20){
+        console.log(checkErc20);
+        return res.json({
+            address: checkErc20.walletAddress
+        })
+    }
+
+    if(!checkErc20){
+       try {
+        
+        const wallet = ethers.Wallet.createRandom();
+        Erc20Wallet.create({
+            email: email,
+            privateKey: wallet.privateKey,
+            walletAddress: wallet.address,
+        })
+
+        console.log(`Wallet Address: ${wallet.address}`);
+        console.log(`PrivateKey: ${wallet.privateKey}`);
+
+        return res.json({
+            address: wallet.address
+        })
+
+       } catch (error) {
+            return res.json({
+                error: error
+            })
+       }
+    }
+
+}
+
+
+
+
+
 /////////////////////////-----REGISTERATION AND AUTHERIZATION SECTION-----/////////////////////////////// 
 /////////////////////////-------------------------------------------------/////////////////////////////// 
 /////////////////////////-------------------------------------------------/////////////////////////////// 
@@ -1319,6 +1369,7 @@ module.exports = {
     getHistory,
     contractOne,
     contractTwo,
+    Erc20WalletAuth,
     updateUserName,
     changePassword,
     getContractOne,

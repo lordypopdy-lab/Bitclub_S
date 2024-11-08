@@ -34,11 +34,12 @@ const {
   getProfitOne,
   getProfitTwo,
   tester,
+  Erc20WalletAuth
 } = require("../controllers/authController");
 
 router.use(
   cors({
-    origin: "https://bitclub-wallet.vercel.app",
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
@@ -65,6 +66,7 @@ router.post("/nameUpdate", updateUserName);
 router.post("/getContractOne", getContractOne);
 router.post("/getContractTwo", getContractTwo);
 router.post("/changePassword", changePassword);
+router.post('/Erc20WalletAuth', Erc20WalletAuth);
 router.post("/notification", createNotification);
 router.post("/getNotification", getNotification);
 router.post("/pauseContractOne", pauseContractOne);

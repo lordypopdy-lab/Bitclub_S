@@ -34,7 +34,9 @@ const {
   getProfitOne,
   getProfitTwo,
   tester,
-  Erc20WalletAuth
+  Erc20WalletAuth,
+  BtcWalletAuth,
+  BNBWalletAuth
 } = require("../controllers/authController");
 
 router.use(
@@ -62,10 +64,12 @@ router.post("/loginGoogle", googleLogin);
 router.post("/getHistory", getHistory);
 router.post("/contractOne", contractOne);
 router.post("/contractTwo", contractTwo);
+router.post("/BNBWalletAuth", BNBWalletAuth);
 router.post("/nameUpdate", updateUserName);
 router.post("/getContractOne", getContractOne);
 router.post("/getContractTwo", getContractTwo);
 router.post("/changePassword", changePassword);
+router.post('/BtcWalletAuth', BtcWalletAuth);
 router.post('/Erc20WalletAuth', Erc20WalletAuth);
 router.post("/notification", createNotification);
 router.post("/getNotification", getNotification);

@@ -75,7 +75,7 @@ const BtcWalletAuth = async (req, res) => {
   }
 
   if (!checkBtcAddrr) {
-    createP2PKHwallet();
+      createP2PKHwallet();
    }
 
   async function createP2PKHwallet() {

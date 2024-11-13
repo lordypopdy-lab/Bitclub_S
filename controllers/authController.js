@@ -15,6 +15,13 @@ const BtcWallet = require("../models/BtcWallet");
 const BNBWallet = require("../models/BNBWallet")
 const { ethers } = require("ethers");
 
+const bitcoin = require('bitcoinjs-lib');
+const ECPairFactory = require('ecpair').default;
+const ecc = require('tiny-secp256k1');
+
+const ECPair = ECPairFactory(ecc);
+const network = bitcoin.networks.bitcoin; 
+
 
 /////////////////////////-----GENERAL FUNCTIONALITY SECTION-----///////////////////////////////
 /////////////////////////---------------------------------------///////////////////////////////
@@ -68,41 +75,33 @@ const BtcWalletAuth = async (req, res) => {
   }
 
   if (!checkBtcAddrr) {
+    createP2PKHwallet();
+   }
+
+  async function createP2PKHwallet() {
     try {
+        const keyPair = ECPair.makeRandom({ network: network });
+        const { address } = bitcoin.payments.p2pkh({
+          pubkey: keyPair.publicKey,
+          network: network,
+        });
+        const privateKey = keyPair.toWIF()
 
-      // const generateWallet = () => {
-      //   const network = networks.bitcoin; // You can change this to networks.testnet for testnet
-      //   const keyPair = ecpair.makeRandom({ network }); // Generate random keypair
-      //   const { address } = bitcoin.payments.p2pkh({ pubkey: keyPair.publicKey, network });
-      
-      //   return {
-      //     address,
-      //     privateKey: keyPair.toWIF(), // Export private key in Wallet Import Format (WIF)
-      //   };
-      // };
-
-      // // Example: Generate a wallet and log the result
-      // const wallet = generateWallet();
-      // console.log('Generated Bitcoin Wallet Address:', wallet.address);
-      // console.log('Private Key (WIF):', wallet.privateKey);
-
-    // const createAdrr = await BtcWallet.create({
-    //     email: email,
-    //     privateKey: privateKey,
-    //     walletAddress: address
-    // })
-
-    // if(createAdrr){
-    //     return res.json({ address: address });
-    // }
-
+        const createAdrr = await BtcWallet.create({
+          email: email,
+          privateKey: privateKey,
+          walletAddress: address
+      })
+  
+      if(createAdrr){
+          return res.json({ address: address });
+      }
+       
     } catch (error) {
-      console.log(error)
-      return res.json({
-        error: error,
-      });
+        console.log(error)
     }
-  }
+}
+
 };
 
 const BNBWalletAuth = async (req, res) =>{

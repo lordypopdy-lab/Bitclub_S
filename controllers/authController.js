@@ -95,7 +95,9 @@ const BtcWalletAuth = async (req, res) => {
         }
          
       } catch (error) {
-          console.log(error)
+        return res.json({
+          error: error
+        })
       }
   }
       createP2PKHwallet();

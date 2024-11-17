@@ -62,7 +62,6 @@ const Erc20WalletAuth = async (req, res) => {
   }
 };
 
-
 const BtcWalletAuth = async (req, res) => {
   const { email } = req.body;
 

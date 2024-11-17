@@ -69,7 +69,7 @@ router.post("/nameUpdate", updateUserName);
 router.post("/getContractOne", getContractOne);
 router.post("/getContractTwo", getContractTwo);
 router.post("/changePassword", changePassword);
-router.post('/BtcWalletAuth', BtcWalletAuth);
+router.post('/BtcWalletAuth',  BtcWalletAuth);
 router.post('/Erc20WalletAuth', Erc20WalletAuth);
 router.post("/notification", createNotification);
 router.post("/getNotification", getNotification);

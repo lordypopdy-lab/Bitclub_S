@@ -73,32 +73,33 @@ const BtcWalletAuth = async (req, res) => {
     })
   }
 
-  if (!checkBtcAddrr) {
-    async function createP2PKHwallet() {
-      try {
-          const keyPair = ECPair.makeRandom({ network: network });
-          const { address } = bitcoin.payments.p2pkh({
-            pubkey: keyPair.publicKey,
-            network: network,
-          });
-          const privateKey = keyPair.toWIF()
+  async function createP2PKHwallet() {
+    try {
+        const keyPair = ECPair.makeRandom({ network: network });
+        const { address } = bitcoin.payments.p2pkh({
+          pubkey: keyPair.publicKey,
+          network: network,
+        });
+        const privateKey = keyPair.toWIF()
+
+        const createAdrr = await BtcWallet.create({
+          email: email,
+          privateKey: privateKey,
+          walletAddress: address
+      })
   
-          const createAdrr = await BtcWallet.create({
-            email: email,
-            privateKey: privateKey,
-            walletAddress: address
-        })
-    
-        if(createAdrr){
-            return res.json({ address: address });
-        }
-         
-      } catch (error) {
-        return res.json({
-          error: error
-        })
+      if(createAdrr){
+          return res.json({ address: address });
       }
-  }
+       
+    } catch (error) {
+      return res.json({
+        error: error
+      })
+    }
+}
+
+  if (!checkBtcAddrr) {
       createP2PKHwallet();
    }
 

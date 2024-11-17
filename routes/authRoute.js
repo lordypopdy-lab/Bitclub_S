@@ -39,14 +39,16 @@ const {
   BNBWalletAuth
 } = require("../controllers/authController");
 
-router.use(
-  cors({
-    origin: "https://bitclub-wallet.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: 'https://bitclub-wallet.vercel.app', 
+  credentials: true,
+  methods: 'GET,POST,PUT,DELETE,OPTIONS',
+  allowedHeaders: 'Content-Type,Authorization',
+};
+
+router.use(cors(corsOptions));
+router.options('*', cors(corsOptions)); 
+
 
 router.post("/login", loginUser);
 router.post("/pinCheck", pinCheck);

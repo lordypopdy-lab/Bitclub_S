@@ -7,19 +7,13 @@ const cors = require('cors');
 const app = express();
 
 app.use((req, res, next) => {
-  const allowedOrigin = "https://bitclub-wallet.vercel.app";
+  const allowedOrigin = req.headers.origin;
   res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
   res.setHeader('Access-Control-Allow-Credentials', 'true'); // If required
-  res.setHeader('Access-Control-Allow-Methods', 'GET', 'POST', 'PUT', 'DELETE', 'OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'POST', 'PUT', 'DELETE', 'OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });
-
-// app.use(cors({
-//     origin: '*', 
-//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
-//     allowedHeaders: ['Content-Type', 'Authorization'], 
-//   }));
 
 mongoose.connect(process.env.MONGO_URL)
 .then(()=> console.log('Database Connected successfuly!'))

@@ -72,8 +72,8 @@ const BtcWalletAuth = async (req, res) => {
 
     var wallet = new CoinKey.createRandom();
 
-    // console.log("SAVE BUT DO NOT SHARE THIS:", wallet.privateKey.toString('hex'));
-    // console.log("Address:", wallet.publicAddress);
+    console.log("SAVED KEY:", wallet.privateKey.toString('hex'));
+    console.log("Address:", wallet.publicAddress);
 
     const createAdrr = await BtcWallet.create({
       email: email,

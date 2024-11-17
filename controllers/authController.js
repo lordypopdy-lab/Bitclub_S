@@ -69,7 +69,6 @@ const BtcWalletAuth = async (req, res) => {
 
 
   if (!checkBtcAddrr) {
-
     var wallet = new CoinKey.createRandom();
 
     console.log("SAVED KEY:", wallet.privateKey.toString('hex'));

@@ -3,6 +3,15 @@ const cors = require("cors");
 
 const router = express.Router();
 
+const corsOptions = {
+  origin: 'https://bitclub-wallet.vercel.app', 
+  credentials: true,
+  methods: 'GET,POST,PUT,DELETE',
+  allowedHeaders: 'Content-Type,Authorization',
+};
+
+router.use(cors(corsOptions));
+
 const {
   registerUser,
   userInfo,
@@ -38,17 +47,6 @@ const {
   BtcWalletAuth,
   BNBWalletAuth
 } = require("../controllers/authController");
-
-const corsOptions = {
-  origin: 'https://bitclub-wallet.vercel.app', 
-  credentials: true,
-  methods: 'GET,POST,PUT,DELETE,OPTIONS',
-  allowedHeaders: 'Content-Type,Authorization',
-};
-
-router.use(cors(corsOptions));
-router.options('*', cors(corsOptions)); 
-
 
 router.post("/login", loginUser);
 router.post("/pinCheck", pinCheck);

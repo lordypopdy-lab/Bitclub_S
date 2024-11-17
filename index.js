@@ -10,7 +10,7 @@ app.use((req, res, next) => {
   const allowedOrigin = "https://bitclub-wallet.vercel.app";
   res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
   res.setHeader('Access-Control-Allow-Credentials', 'true'); // If required
-  res.setHeader('Access-Control-Allow-Methods', 'POST', 'PUT', 'DELETE', 'OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'POST', 'PUT', 'DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 });

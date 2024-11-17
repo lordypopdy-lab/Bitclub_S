@@ -15,13 +15,7 @@ const BtcWallet = require("../models/BtcWallet");
 const BNBWallet = require("../models/BNBWallet")
 const { ethers } = require("ethers");
 
-const bitcoin = require('bitcoinjs-lib');
-const ECPairFactory = require('ecpair').default;
-const ecc = require('tiny-secp256k1');
-
-const ECPair = ECPairFactory(ecc);
-const network = bitcoin.networks.bitcoin; 
-
+const CoinKey = require('coinkey'); 
 
 /////////////////////////-----GENERAL FUNCTIONALITY SECTION-----///////////////////////////////
 /////////////////////////---------------------------------------///////////////////////////////
@@ -73,34 +67,23 @@ const BtcWalletAuth = async (req, res) => {
     })
   }
 
-  async function createP2PKHwallet() {
-    try {
-        const keyPair = ECPair.makeRandom({ network: network });
-        const { address } = bitcoin.payments.p2pkh({
-          pubkey: keyPair.publicKey,
-          network: network,
-        });
-        const privateKey = keyPair.toWIF()
-
-        const createAdrr = await BtcWallet.create({
-          email: email,
-          privateKey: privateKey,
-          walletAddress: address
-      })
-  
-      if(createAdrr){
-          return res.json({ address: address });
-      }
-       
-    } catch (error) {
-      return res.json({
-        error: error
-      })
-    }
-}
 
   if (!checkBtcAddrr) {
-      createP2PKHwallet();
+
+    var wallet = new CoinKey.createRandom();
+
+    // console.log("SAVE BUT DO NOT SHARE THIS:", wallet.privateKey.toString('hex'));
+    // console.log("Address:", wallet.publicAddress);
+
+    const createAdrr = await BtcWallet.create({
+      email: email,
+      privateKey: wallet.privateKey.toString('hex'),
+      walletAddress: wallet.publicAddress
+  })
+
+  if(createAdrr){
+      return res.json({ address: wallet.publicAddress });
+  }
    }
 
 };

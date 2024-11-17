@@ -7,11 +7,15 @@ const cors = require('cors');
 const app = express();
 
 app.use((req, res, next) => {
-  const allowedOrigin = "https://bitclub-wallet.vercel.app";
-  res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
-  res.setHeader('Access-Control-Allow-Credentials', 'true'); // If required
-  res.setHeader('Access-Control-Allow-Methods', 'POST', 'PUT', 'DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Origin', 'https://bitclub-wallet.vercel.app');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
+
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+
   next();
 });
 

@@ -6,11 +6,12 @@ const router = express.Router();
 const corsOptions = {
   origin: 'https://bitclub-wallet.vercel.app', 
   credentials: true,
-  methods: 'GET,POST,PUT,DELETE',
+  methods: 'GET,POST,PUT,DELETE,OPTIONS',
   allowedHeaders: 'Content-Type,Authorization',
 };
 
 router.use(cors(corsOptions));
+router.options('*', cors(corsOptions)); 
 
 const {
   registerUser,

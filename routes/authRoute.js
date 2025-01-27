@@ -15,7 +15,7 @@ router.use((req, res, next) => {
 
   next();
 });
-
+//http://localhost:3000 
 const corsOptions = {
   origin: 'https://bitclub-wallet.vercel.app', 
   credentials: true,
